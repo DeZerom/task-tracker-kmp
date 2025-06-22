@@ -1,22 +1,10 @@
 plugins {
-    alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidKotlinMultiplatformLibrary)
+    alias(libs.plugins.build.kmpLibrary)
 }
 
 kotlin {
     androidLibrary {
         namespace = "ru.dezerom.tasktracker.core.tools"
-        compileSdk = 35
-        minSdk = 24
-
-        withHostTestBuilder {
-        }
-
-        withDeviceTestBuilder {
-            sourceSetTreeName = "test"
-        }.configure {
-            instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        }
     }
 
     val xcfName = "coreToolsKit"
@@ -38,19 +26,10 @@ kotlin {
         }
     }
 
-    jvm("desktop")
-
     sourceSets {
         commonMain {
             dependencies {
-                implementation(libs.kotlin.stdlib)
-                implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.kotlinx.dateTime)
-            }
-        }
-        commonTest {
-            dependencies {
-                implementation(libs.kotlin.test)
             }
         }
     }

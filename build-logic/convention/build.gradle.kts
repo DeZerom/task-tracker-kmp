@@ -27,6 +27,9 @@ dependencies {
 
 gradlePlugin {
     plugins {
-
+        register("kmpLibrary") {
+            id = "build.kmp.library"
+            implementationClass = "ru.dezerom.convention.KmpLibraryConventionPlugin"
+        }
     }
 }
