@@ -2,6 +2,7 @@ rootProject.name = "TaskTracker"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google {
             mavenContent {
@@ -33,3 +34,6 @@ plugins {
 }
 
 include(":composeApp")
+
+include(":core:tools")
+include(":core:data")
