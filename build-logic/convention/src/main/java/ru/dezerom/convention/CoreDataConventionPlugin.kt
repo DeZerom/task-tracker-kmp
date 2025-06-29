@@ -2,6 +2,8 @@ package ru.dezerom.convention
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import ru.dezerom.convention.dependencies.androidxDatastore
+import ru.dezerom.convention.dependencies.androidxDatastorePreferences
 import ru.dezerom.convention.dependencies.kotlinxSerializationJson
 import ru.dezerom.convention.dependencies.ktorClient
 import ru.dezerom.convention.dependencies.logging
@@ -22,7 +24,11 @@ class CoreDataConventionPlugin: Plugin<Project> {
 
                     implementation(libs.kotlinxSerializationJson)
                     implementation(libs.logging)
+
                     implementation(libs.ktorClient)
+
+                    implementation(libs.androidxDatastore)
+                    implementation(libs.androidxDatastorePreferences)
                 }
             }
         }

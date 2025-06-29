@@ -24,6 +24,7 @@ jsonSerialization = "1.8.1"
 dateTime = "0.6.2"
 logging = "2.0.3"
 ktor = "3.2.0"
+datastore = "1.1.7"
 app-versionName-android = "0.0.2"
 app-versionName-desktop = "1.0.0"
 app-versionCode = "2"
@@ -46,6 +47,8 @@ kotlinx-serializationJson = { module = "org.jetbrains.kotlinx:kotlinx-serializat
 kotlinx-dateTime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "dateTime"}
 diamondEdge-logging = { module = "com.diamondedge:logging", version.ref = "logging" }
 ktorClient = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
+androidx-datastorePreferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 
 # for build logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
