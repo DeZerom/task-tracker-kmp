@@ -6,6 +6,7 @@ import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import ru.dezerom.convention.dependencies.kotlinxSerializationJson
+import ru.dezerom.convention.dependencies.ktorClient
 import ru.dezerom.convention.dependencies.logging
 import ru.dezerom.convention.utils.commonMainImplementation
 import ru.dezerom.convention.utils.kotlin
@@ -25,6 +26,7 @@ class CoreDataConventionPlugin: Plugin<Project> {
 
                     implementation(libs.kotlinxSerializationJson)
                     implementation(libs.logging)
+                    implementation(libs.ktorClient)
                 }
             }
         }
