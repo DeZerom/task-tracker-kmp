@@ -31,5 +31,10 @@ gradlePlugin {
             id = "build.kmp.library"
             implementationClass = "ru.dezerom.convention.KmpLibraryConventionPlugin"
         }
+
+        register("coreData") {
+            id = "build.core.data"
+            implementationClass = "ru.dezerom.convention.CoreDataConventionPlugin"
+        }
     }
 }

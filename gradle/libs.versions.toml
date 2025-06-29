@@ -10,7 +10,7 @@ androidx-core = "1.16.0"
 androidx-espresso = "3.6.1"
 androidx-lifecycle = "2.9.0"
 androidx-testExt = "1.2.1"
-composeHotReload = "1.0.0-alpha10"
+composeHotReload = "1.0.0-beta01"
 composeMultiplatform = "1.8.1"
 junit = "4.13.2"
 kotlin = "2.1.21"
@@ -22,6 +22,10 @@ runner = "1.6.2"
 core = "1.6.1"
 jsonSerialization = "1.8.1"
 dateTime = "0.6.2"
+logging = "2.0.3"
+app-versionName-android = "0.0.2"
+app-versionName-desktop = "1.0.0"
+app-versionCode = "2"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -39,6 +43,7 @@ kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-c
 kotlinx-coroutinesSwing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
 kotlinx-serializationJson = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "jsonSerialization" }
 kotlinx-dateTime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "dateTime"}
+diamondEdge-logging = { module = "com.diamondedge:logging", version.ref = "logging" }
 
 # for build logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
@@ -62,3 +67,4 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 
 #build-logic
 build-kmpLibrary = { id = "build.kmp.library", version = "unspecified" }
+build-core-data = { id = "build.core.data", version = "unspecified" }

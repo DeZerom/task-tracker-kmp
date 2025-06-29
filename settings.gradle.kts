@@ -35,5 +35,6 @@ plugins {
 
 include(":composeApp")
 
+include(":core:resources")
 include(":core:tools")
 include(":core:data")

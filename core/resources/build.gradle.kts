@@ -1,13 +1,15 @@
 plugins {
     alias(libs.plugins.build.kmpLibrary)
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
 }
 
 kotlin {
     androidLibrary {
-        namespace = "ru.dezerom.tasktracker.core.tools"
+        namespace = "ru.dezerom.tasktracker.core.resources"
     }
 
-    val xcfName = "coreToolsKit"
+    val xcfName = "coreResourcesKit"
     iosX64 {
         binaries.framework {
             baseName = xcfName
@@ -29,9 +31,13 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(libs.kotlinx.dateTime)
-                implementation(projects.core.resources)
+                implementation(compose.components.resources)
             }
         }
     }
+}
+
+compose.resources {
+    publicResClass = true
+    packageOfResClass = "ru.dezerom.tasktracker.core.resources"
 }

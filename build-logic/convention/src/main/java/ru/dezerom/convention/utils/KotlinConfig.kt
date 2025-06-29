@@ -1,6 +1,7 @@
 package ru.dezerom.convention.utils
 
 import com.android.build.api.dsl.androidLibrary
+import org.gradle.api.Action
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
@@ -26,4 +27,8 @@ internal fun Project.configureKotlinMultiplatform() {
         iosArm64()
         jvm("desktop")
     }
+}
+
+internal fun Project.kotlin(action: Action<KotlinMultiplatformExtension>) {
+    extensions.configure(KotlinMultiplatformExtension::class.java, action)
 }

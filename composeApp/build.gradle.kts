@@ -65,8 +65,8 @@ android {
         applicationId = "ru.dezerom.tasktracker"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = libs.versions.app.versionCode.get().toInt()
+        versionName = libs.versions.app.versionName.android.get()
     }
     packaging {
         resources {
@@ -95,7 +95,7 @@ compose.desktop {
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "ru.dezerom.tasktracker"
-            packageVersion = "1.0.0"
+            packageVersion = libs.versions.app.versionName.desktop.get()
         }
     }
 }

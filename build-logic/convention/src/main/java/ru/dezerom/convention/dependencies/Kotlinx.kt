@@ -8,3 +8,6 @@ val VersionCatalog.kotlinxCoroutines get() =
 
 val VersionCatalog.kotlinxDateTime get() =
     findLibrary("kotlinx-dateTime").get()
+
+val VersionCatalog.kotlinxSerializationJson get() =
+    findLibrary("kotlinx-serializationJson").get()
