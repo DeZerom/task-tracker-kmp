@@ -36,5 +36,9 @@ gradlePlugin {
             id = "build.core.data"
             implementationClass = "ru.dezerom.convention.CoreDataConventionPlugin"
         }
+        register("coreUi") {
+            id = "build.core.ui"
+            implementationClass = "ru.dezerom.convention.CoreUiConventionPlugin"
+        }
     }
 }

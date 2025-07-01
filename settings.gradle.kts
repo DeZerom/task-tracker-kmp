@@ -38,3 +38,6 @@ include(":composeApp")
 include(":core:resources")
 include(":core:tools")
 include(":core:data")
+
+include(":auth:ui")
+include(":core:ui")

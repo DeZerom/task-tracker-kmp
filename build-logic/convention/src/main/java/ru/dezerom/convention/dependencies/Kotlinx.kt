@@ -10,3 +10,6 @@ internal val VersionCatalog.kotlinxDateTime get() =
 
 internal val VersionCatalog.kotlinxSerializationJson get() =
     findLibrary("kotlinx-serializationJson").get()
+
+internal val VersionCatalog.kotlinxCoroutinesSwing get() =
+    findLibrary("kotlinx-coroutinesSwing").get()

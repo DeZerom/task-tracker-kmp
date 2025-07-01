@@ -7,3 +7,6 @@ val VersionCatalog.androidxDatastore get() =
 
 val VersionCatalog.androidxDatastorePreferences get() =
     findLibrary("androidx-datastorePreferences").get()
+
+val VersionCatalog.androidxActivityCompose get() =
+    findLibrary("androidx-activity-compose").get()
