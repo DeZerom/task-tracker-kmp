@@ -11,19 +11,21 @@ import ru.dezerom.convention.utils.desktopMain
 import ru.dezerom.convention.utils.kotlin
 import ru.dezerom.convention.utils.libs
 
-class CoreUiConventionPlugin: Plugin<Project> {
+class FeatureUiConventionPlugin: Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
                 apply("build.kmp.library")
                 apply("org.jetbrains.compose")
                 apply("org.jetbrains.kotlin.plugin.compose")
+                apply("org.jetbrains.compose.hot-reload")
             }
 
             kotlin {
                 sourceSets.commonMain.dependencies {
                     implementation(project(":core:resources"))
                     implementation(project(":core:tools"))
+                    implementation(project(":core:ui"))
 
                     implementation(libs.logging)
 

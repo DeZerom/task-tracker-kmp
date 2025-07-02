@@ -40,5 +40,10 @@ gradlePlugin {
             id = "build.core.ui"
             implementationClass = "ru.dezerom.convention.CoreUiConventionPlugin"
         }
+
+        register("featureUi") {
+            id = "build.feature.ui"
+            implementationClass = "ru.dezerom.convention.FeatureUiConventionPlugin"
+        }
     }
 }

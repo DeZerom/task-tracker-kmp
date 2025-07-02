@@ -13,46 +13,44 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import ru.dezerom.core.tools.R
-import ru.dezerom.core.tools.consts.Colors
-import ru.dezerom.core.tools.consts.Dimens
-import ru.dezerom.core.tools.string_container.getString
-import ru.dezerom.core.ui.kit.buttons.WhiteButton
-import ru.dezerom.core.ui.kit.text_input.PasswordInput
-import ru.dezerom.core.ui.kit.text_input.TextInput
-import ru.dezerom.core.ui.kit.text_style.TS
-import ru.dezerom.core.ui.kit.theme.TaskTrackerTheme
-import ru.dezerom.core.ui.kit.widgets.AffectScaffold
-import ru.dezerom.core.ui.kit.widgets.VSpacer
-import ru.dezerom.core.ui.test_tools.TestTags
-import ru.dezerom.core.ui.tools.ProcessSideEffects
+import androidx.compose.ui.unit.dp
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
+import ru.dezerom.tasktracker.core.resources.Res
+import ru.dezerom.tasktracker.core.resources.app_icon
+import ru.dezerom.tasktracker.core.resources.auth_authorization
+import ru.dezerom.tasktracker.core.resources.auth_authorize
+import ru.dezerom.tasktracker.core.resources.auth_create_account
+import ru.dezerom.tasktracker.core.resources.auth_login
+import ru.dezerom.tasktracker.core.resources.auth_password
+import ru.dezerom.tasktracker.core.ui.kit.Colors
+import ru.dezerom.tasktracker.core.ui.kit.TS
+import ru.dezerom.tasktracker.core.ui.kit.buttons.WhiteButton
+import ru.dezerom.tasktracker.core.ui.kit.text_input.PasswordInput
+import ru.dezerom.tasktracker.core.ui.kit.text_input.TextInput
+import ru.dezerom.tasktracker.core.ui.tools.getString
+import ru.dezerom.tasktracker.core.ui.widgets.VSpacer
 
 @Composable
 fun AuthScreen() {
-    ProcessSideEffects(viewModel.sideEffect) {
-        when (it) {
-            AuthScreenSideEffect.GoToRegistration -> navigator.fromAuthToRegistration()
-            AuthScreenSideEffect.GoToTasks -> navigator.fromAuthToTasks()
-        }
-    }
+//    ProcessSideEffects(viewModel.sideEffect) {
+//        when (it) {
+//            AuthScreenSideEffect.GoToRegistration -> navigator.fromAuthToRegistration()
+//            AuthScreenSideEffect.GoToTasks -> navigator.fromAuthToTasks()
+//        }
+//    }
 
-    val state = viewModel.state.collectAsState()
-
-    if (state.value.isInitializing) {
-        AuthScreenInit()
-    } else {
+//    if (state.value.isInitializing) {
+//        AuthScreenInit()
+//    } else {
         AuthScreenContent(
-            onEvent = viewModel::onEvent,
-            state = state.value,
+            onEvent = {},
+            state = AuthScreenState(),
         )
-    }
+//    }
 }
 
 @Composable
@@ -65,11 +63,9 @@ private fun AuthScreenInit() {
                 .padding(innerPadding)
         ) {
             Image(
-                painter = painterResource(id = R.drawable.app_icon),
+                painter = painterResource(resource = Res.drawable.app_icon),
                 contentDescription = null,
-                modifier = Modifier
-                    .size(Dimens.Sizes.IconExtraBig)
-                    .testTag(TestTags.Image.APP_ICON),
+                modifier = Modifier.size(192.dp)
             )
         }
     }
@@ -80,76 +76,67 @@ internal fun AuthScreenContent(
     onEvent: (AuthScreenEvent) -> Unit,
     state: AuthScreenState,
 ) {
-    AffectScaffold(
-        showBottomNavBar = false
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .imePadding()
+            .fillMaxSize()
+            .padding(all = 16.dp)
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
+        VSpacer(height = 96.dp)
+        Image(
+            painter = painterResource(resource = Res.drawable.app_icon),
+            contentDescription = null,
+        )
+        VSpacer(height = 24.dp)
+        Text(
+            stringResource(resource = Res.string.auth_authorization),
+            style = TS.titleLarge
+        )
+        VSpacer(height = 36.dp)
+        TextInput(
+            value = state.login,
+            labelText = stringResource(resource = Res.string.auth_login),
+            isError = state.loginError != null,
+            error = state.loginError?.getString(),
+            onValueChanged = { onEvent(AuthScreenEvent.LoginChanged(it)) },
+            modifier = Modifier.fillMaxWidth(),
+        )
+        VSpacer(height = 16.dp)
+        PasswordInput(
+            value = state.password,
+            labelText = stringResource(resource = Res.string.auth_password),
+            isError = state.passwordError != null,
+            error = state.passwordError?.getString(),
+            onValueChanged = { onEvent(AuthScreenEvent.PasswordChanged(it)) },
+            modifier = Modifier.fillMaxWidth(),
+        )
+        VSpacer(height = 8.dp)
+        Text(
+            text = stringResource(resource = Res.string.auth_create_account),
+            color = Colors.secondaryText,
+            style = TS.bodySmall,
             modifier = Modifier
-                .imePadding()
-                .fillMaxSize()
-                .padding(all = Dimens.Padding.Medium)
-        ) {
-            VSpacer(height = Dimens.Padding.XXXBig)
-            Image(
-                painter = painterResource(id = R.drawable.app_icon),
-                contentDescription = null,
-                modifier = Modifier.testTag(TestTags.Image.APP_ICON),
-            )
-            VSpacer(height = Dimens.Padding.MediumPlus)
-            Text(
-                stringResource(id = R.string.authorization),
-                style = TS.titleLarge
-            )
-            VSpacer(height = Dimens.Padding.Big)
-            TextInput(
-                value = state.login,
-                labelText = stringResource(id = R.string.login),
-                isError = state.loginError != null,
-                error = state.loginError?.getString(),
-                onValueChanged = { onEvent(AuthScreenEvent.LoginChanged(it)) },
-                modifier = Modifier.fillMaxWidth(),
-                testTag = TestTags.TextInput.LOGIN,
-            )
-            VSpacer(height = Dimens.Padding.Medium)
-            PasswordInput(
-                value = state.password,
-                labelText = stringResource(id = R.string.password),
-                isError = state.passwordError != null,
-                error = state.passwordError?.getString(),
-                onValueChanged = { onEvent(AuthScreenEvent.PasswordChanged(it)) },
-                modifier = Modifier.fillMaxWidth(),
-                testTag = TestTags.TextInput.PASSWORD,
-            )
-            VSpacer(height = Dimens.Padding.Small)
-            Text(
-                text = stringResource(id = R.string.create_account),
-                color = Colors.secondaryText,
-                style = TS.bodySmall,
-                modifier = Modifier
-                    .align(Alignment.Start)
-                    .clickable { onEvent(AuthScreenEvent.OnCreateAccClicked) }
-                    .testTag(TestTags.Button.CREATE_ACC_BUTTON)
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            WhiteButton(
-                onClick = { onEvent(AuthScreenEvent.OnAuthorizeClicked) },
-                text = stringResource(id = R.string.authorize),
-                isLoading = state.isLoading,
-                modifier = Modifier.fillMaxWidth(),
-                testTag = TestTags.Button.AUTH_BUTTON,
-            )
-        }
+                .align(Alignment.Start)
+                .clickable { onEvent(AuthScreenEvent.OnCreateAccClicked) }
+        )
+        Spacer(modifier = Modifier.weight(1f))
+        WhiteButton(
+            onClick = { onEvent(AuthScreenEvent.OnAuthorizeClicked) },
+            text = stringResource(resource = Res.string.auth_authorize),
+            isLoading = state.isLoading,
+            modifier = Modifier.fillMaxWidth(),
+        )
     }
 }
 
 @Composable
 @Preview
 private fun AuthScreenPreview() {
-    TaskTrackerTheme {
+//    TaskTrackerTheme {
         AuthScreenContent(
             onEvent = {},
             state = AuthScreenState(),
         )
-    }
+//    }
 }

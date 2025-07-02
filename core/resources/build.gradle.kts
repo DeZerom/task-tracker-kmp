@@ -1,3 +1,5 @@
+import ru.dezerom.convention.dependencies.addComposeDependencies
+
 plugins {
     alias(libs.plugins.build.kmpLibrary)
     alias(libs.plugins.composeMultiplatform)
@@ -31,7 +33,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(compose.components.resources)
+                addComposeDependencies(compose)
             }
         }
     }

@@ -1,5 +1,7 @@
 plugins {
     alias(libs.plugins.build.kmpLibrary)
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
 }
 
 kotlin {
@@ -29,6 +31,9 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                implementation(compose.runtime)
+                implementation(compose.components.resources)
+
                 implementation(libs.kotlinx.dateTime)
                 implementation(projects.core.resources)
             }

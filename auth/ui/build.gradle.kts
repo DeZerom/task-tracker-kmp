@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.build.kmpLibrary)
+    alias(libs.plugins.build.feature.ui)
 }
 
 kotlin {
