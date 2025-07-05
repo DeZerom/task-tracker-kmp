@@ -2,6 +2,7 @@ package ru.dezerom.tasktracker.core.ui.kit.text_input
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -54,6 +55,7 @@ fun TextInput(
             visualTransformation = visualTransformation,
             singleLine = singleLine,
             minLines = minLines,
+            modifier = Modifier.fillMaxWidth()
         )
         if (isError && !error.isNullOrBlank()) {
             Text(

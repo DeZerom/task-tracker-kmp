@@ -31,6 +31,7 @@ import ru.dezerom.tasktracker.core.ui.kit.TS
 import ru.dezerom.tasktracker.core.ui.kit.buttons.WhiteButton
 import ru.dezerom.tasktracker.core.ui.kit.text_input.PasswordInput
 import ru.dezerom.tasktracker.core.ui.kit.text_input.TextInput
+import ru.dezerom.tasktracker.core.ui.kit.theme.TaskTrackerTheme
 import ru.dezerom.tasktracker.core.ui.tools.getString
 import ru.dezerom.tasktracker.core.ui.widgets.VSpacer
 
@@ -133,10 +134,10 @@ internal fun AuthScreenContent(
 @Composable
 @Preview
 private fun AuthScreenPreview() {
-//    TaskTrackerTheme {
+    TaskTrackerTheme {
         AuthScreenContent(
             onEvent = {},
             state = AuthScreenState(),
         )
-//    }
+    }
 }

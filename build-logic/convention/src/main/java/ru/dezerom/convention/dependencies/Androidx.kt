@@ -10,6 +10,3 @@ val VersionCatalog.androidxDatastorePreferences get() =
 
 val VersionCatalog.androidxActivityCompose get() =
     findLibrary("androidx-activity-compose").get()
-
-val VersionCatalog.androidxComposeRuntime get() =
-    findLibrary("androidx-composeRuntime").get()

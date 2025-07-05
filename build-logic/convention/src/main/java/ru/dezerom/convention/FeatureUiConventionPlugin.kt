@@ -4,6 +4,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import ru.dezerom.convention.dependencies.addComposeDependencies
 import ru.dezerom.convention.dependencies.androidxActivityCompose
+import ru.dezerom.convention.dependencies.composeWindowSize
 import ru.dezerom.convention.dependencies.kotlinxCoroutinesSwing
 import ru.dezerom.convention.dependencies.logging
 import ru.dezerom.convention.utils.compose
@@ -28,6 +29,7 @@ class FeatureUiConventionPlugin: Plugin<Project> {
                     implementation(project(":core:ui"))
 
                     implementation(libs.logging)
+                    implementation(libs.composeWindowSize)
 
                     addComposeDependencies(compose)
                 }

@@ -50,7 +50,7 @@ diamondEdge-logging = { module = "com.diamondedge:logging", version.ref = "loggi
 ktorClient = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
 androidx-datastorePreferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
-androidx-composeRuntime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "composeMultiplatform" }
+compose-windowSize = { module = "org.jetbrains.compose.material3:material3-window-size-class", version.ref = "composeMultiplatform" }
 
 # for build logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
