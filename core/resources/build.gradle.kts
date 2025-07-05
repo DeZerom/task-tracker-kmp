@@ -9,6 +9,7 @@ plugins {
 kotlin {
     androidLibrary {
         namespace = "ru.dezerom.tasktracker.core.resources"
+        experimentalProperties["android.experimental.kmp.enableAndroidResources"] = true
     }
 
     val xcfName = "coreResourcesKit"
@@ -35,6 +36,7 @@ kotlin {
             dependencies {
                 addComposeDependencies(compose)
             }
+            resources.srcDirs("src/commonMain/composeResources")
         }
     }
 }
