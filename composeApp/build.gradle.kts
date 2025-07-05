@@ -47,6 +47,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
 
             implementation(projects.auth.ui)
+            implementation(projects.core.ui)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
