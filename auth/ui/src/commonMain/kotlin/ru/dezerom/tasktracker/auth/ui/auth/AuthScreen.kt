@@ -4,12 +4,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,7 +33,9 @@ import ru.dezerom.tasktracker.core.ui.kit.buttons.WhiteButton
 import ru.dezerom.tasktracker.core.ui.kit.text_input.PasswordInput
 import ru.dezerom.tasktracker.core.ui.kit.text_input.TextInput
 import ru.dezerom.tasktracker.core.ui.kit.theme.TaskTrackerTheme
+import ru.dezerom.tasktracker.core.ui.tools.LocalWindowSize
 import ru.dezerom.tasktracker.core.ui.tools.getString
+import ru.dezerom.tasktracker.core.ui.tools.size.singleElementWidth
 import ru.dezerom.tasktracker.core.ui.widgets.VSpacer
 
 @Composable
@@ -44,7 +47,11 @@ fun AuthScreen() {
 //        }
 //    }
 
-//    if (state.value.isInitializing) {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        //    if (state.value.isInitializing) {
 //        AuthScreenInit()
 //    } else {
         AuthScreenContent(
@@ -52,6 +59,7 @@ fun AuthScreen() {
             state = AuthScreenState(),
         )
 //    }
+    }
 }
 
 @Composable
@@ -80,11 +88,11 @@ internal fun AuthScreenContent(
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
+            .verticalScroll(rememberScrollState())
             .imePadding()
-            .fillMaxSize()
+            .singleElementWidth(LocalWindowSize.current)
             .padding(all = 16.dp)
     ) {
-        VSpacer(height = 96.dp)
         Image(
             painter = painterResource(resource = Res.drawable.app_icon),
             contentDescription = null,
@@ -121,7 +129,7 @@ internal fun AuthScreenContent(
                 .align(Alignment.Start)
                 .clickable { onEvent(AuthScreenEvent.OnCreateAccClicked) }
         )
-        Spacer(modifier = Modifier.weight(1f))
+        VSpacer(height = 48.dp)
         WhiteButton(
             onClick = { onEvent(AuthScreenEvent.OnAuthorizeClicked) },
             text = stringResource(resource = Res.string.auth_authorize),
