@@ -4,15 +4,53 @@ import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSiz
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.window.singleWindowApplication
+import com.arkivanov.decompose.DefaultComponentContext
+import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import ru.dezerom.tasktracker.core.ui.tools.LocalWindowSize
+import ru.dezerom.tasktracker.navigation.DefaultRootComponent
+import javax.swing.SwingUtilities
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
-fun main() = singleWindowApplication {
-    val size = calculateWindowSizeClass()
+fun main() {
+    val lifecycle = LifecycleRegistry()
 
-    CompositionLocalProvider(
-        LocalWindowSize provides size
-    ) {
-        App()
+    val rootComponent = runOnUiThread { 
+        DefaultRootComponent(
+            DefaultComponentContext(
+                lifecycle = lifecycle
+            )
+        ) 
     }
+
+    singleWindowApplication {
+        val size = calculateWindowSizeClass()
+
+        CompositionLocalProvider(
+            LocalWindowSize provides size
+        ) {
+            App(rootComponent)
+        }
+    }
+}
+
+internal fun <T> runOnUiThread(block: () -> T): T {
+    if (SwingUtilities.isEventDispatchThread()) {
+        return block()
+    }
+
+    var error: Throwable? = null
+    var result: T? = null
+
+    SwingUtilities.invokeAndWait {
+        try {
+            result = block()
+        } catch (e: Throwable) {
+            error = e
+        }
+    }
+
+    error?.also { throw it }
+
+    @Suppress("UNCHECKED_CAST")
+    return result as T
 }

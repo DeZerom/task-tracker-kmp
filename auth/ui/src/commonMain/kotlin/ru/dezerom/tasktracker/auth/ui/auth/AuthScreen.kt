@@ -39,7 +39,9 @@ import ru.dezerom.tasktracker.core.ui.tools.size.singleElementWidth
 import ru.dezerom.tasktracker.core.ui.widgets.VSpacer
 
 @Composable
-fun AuthScreen() {
+internal fun AuthScreen(
+    authComponent: AuthComponent
+) {
 //    ProcessSideEffects(viewModel.sideEffect) {
 //        when (it) {
 //            AuthScreenSideEffect.GoToRegistration -> navigator.fromAuthToRegistration()
@@ -81,7 +83,7 @@ private fun AuthScreenInit() {
 }
 
 @Composable
-internal fun AuthScreenContent(
+private fun AuthScreenContent(
     onEvent: (AuthScreenEvent) -> Unit,
     state: AuthScreenState,
 ) {

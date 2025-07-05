@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {
@@ -46,6 +47,8 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(libs.compose.windowSize)
+            implementation(libs.arkivanov.decompose)
+            implementation(libs.arkivanov.decomposeComposeExtensions)
 
             implementation(projects.auth.ui)
             implementation(projects.core.ui)

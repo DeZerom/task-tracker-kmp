@@ -5,6 +5,8 @@ import org.gradle.api.Project
 import ru.dezerom.convention.dependencies.addComposeDependencies
 import ru.dezerom.convention.dependencies.androidxActivityCompose
 import ru.dezerom.convention.dependencies.composeWindowSize
+import ru.dezerom.convention.dependencies.decompose
+import ru.dezerom.convention.dependencies.decomposeComposeExtensions
 import ru.dezerom.convention.dependencies.kotlinxCoroutinesSwing
 import ru.dezerom.convention.dependencies.logging
 import ru.dezerom.convention.utils.compose
@@ -20,6 +22,7 @@ class FeatureUiConventionPlugin: Plugin<Project> {
                 apply("org.jetbrains.compose")
                 apply("org.jetbrains.kotlin.plugin.compose")
                 apply("org.jetbrains.compose.hot-reload")
+                apply("org.jetbrains.kotlin.plugin.serialization")
             }
 
             kotlin {
@@ -30,6 +33,9 @@ class FeatureUiConventionPlugin: Plugin<Project> {
 
                     implementation(libs.logging)
                     implementation(libs.composeWindowSize)
+
+                    implementation(libs.decompose)
+                    implementation(libs.decomposeComposeExtensions)
 
                     addComposeDependencies(compose)
                 }
