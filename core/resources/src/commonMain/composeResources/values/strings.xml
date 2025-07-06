@@ -13,4 +13,11 @@
     <string name="auth_unknown_error">Неизвестная ошибка</string>
     <string name="auth_field_must_not_be_empty">Поле обязательно</string>
     <string name="auth_auth_error">Ошибка авторизации</string>
+
+    <string name="reg_registration">Регистрация</string>
+    <string name="reg_register">Зарегистрироваться</string>
+    <string name="reg_success_reg">Успешная регистрация</string>
+    <string name="reg_login">Логин</string>
+    <string name="reg_password">Пароль</string>
+    <string name="reg_has_account">У меня есть аккаунт</string>
 </resources>

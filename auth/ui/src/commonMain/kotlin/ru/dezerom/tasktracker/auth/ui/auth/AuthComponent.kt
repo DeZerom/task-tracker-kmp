@@ -20,12 +20,12 @@ internal class AuthComponent(
         when (event) {
             is AuthScreenEvent.LoginChanged -> onLoginChanged(event.newLogin)
             is AuthScreenEvent.PasswordChanged -> onPasswordChanged(event.newPassword)
-            AuthScreenEvent.OnAuthorizeClicked -> createAccountClicked()
-            AuthScreenEvent.OnCreateAccClicked -> onAuthorizeClicked()
+            AuthScreenEvent.OnAuthorizeClicked -> onAuthorizeClicked()
+            AuthScreenEvent.OnCreateAccClicked -> createAccountClicked()
         }
     }
 
-    fun createAccountClicked() = onCreateAccountClicked()
+    private fun createAccountClicked() = onCreateAccountClicked()
 
     private fun onLoginChanged(login: String) {
         reduceState {

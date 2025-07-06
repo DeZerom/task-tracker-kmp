@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import ru.dezerom.tasktracker.auth.ui.auth.AuthScreen
+import ru.dezerom.tasktracker.auth.ui.registration.RegistrationScreen
 
 @Composable
 fun AuthRootContent(
@@ -16,6 +17,7 @@ fun AuthRootContent(
     ) {
         when (val child = it.instance) {
             is AuthRootComponent.Child.Auth -> AuthScreen(child.authComponent)
+            is AuthRootComponent.Child.Registration -> RegistrationScreen(child.registrationComponent)
         }
     }
 }
