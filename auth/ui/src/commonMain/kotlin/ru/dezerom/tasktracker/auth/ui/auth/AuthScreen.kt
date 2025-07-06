@@ -14,6 +14,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -42,25 +44,20 @@ import ru.dezerom.tasktracker.core.ui.widgets.VSpacer
 internal fun AuthScreen(
     authComponent: AuthComponent
 ) {
-//    ProcessSideEffects(viewModel.sideEffect) {
-//        when (it) {
-//            AuthScreenSideEffect.GoToRegistration -> navigator.fromAuthToRegistration()
-//            AuthScreenSideEffect.GoToTasks -> navigator.fromAuthToTasks()
-//        }
-//    }
+    val state by authComponent.state.collectAsState()
 
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        //    if (state.value.isInitializing) {
-//        AuthScreenInit()
-//    } else {
-        AuthScreenContent(
-            onEvent = {},
-            state = AuthScreenState(),
-        )
-//    }
+        if (state.isInitializing) {
+            AuthScreenInit()
+        } else {
+            AuthScreenContent(
+                onEvent = authComponent::consumeEvent,
+                state = state,
+            )
+        }
     }
 }
 
@@ -84,8 +81,8 @@ private fun AuthScreenInit() {
 
 @Composable
 private fun AuthScreenContent(
-    onEvent: (AuthScreenEvent) -> Unit,
-    state: AuthScreenState,
+    onEvent: (AuthContract.AuthScreenEvent) -> Unit,
+    state: AuthContract.AuthScreenState,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -110,7 +107,7 @@ private fun AuthScreenContent(
             labelText = stringResource(resource = Res.string.auth_login),
             isError = state.loginError != null,
             error = state.loginError?.getString(),
-            onValueChanged = { onEvent(AuthScreenEvent.LoginChanged(it)) },
+            onValueChanged = { onEvent(AuthContract.AuthScreenEvent.LoginChanged(it)) },
             modifier = Modifier.fillMaxWidth(),
         )
         VSpacer(height = 16.dp)
@@ -119,7 +116,7 @@ private fun AuthScreenContent(
             labelText = stringResource(resource = Res.string.auth_password),
             isError = state.passwordError != null,
             error = state.passwordError?.getString(),
-            onValueChanged = { onEvent(AuthScreenEvent.PasswordChanged(it)) },
+            onValueChanged = { onEvent(AuthContract.AuthScreenEvent.PasswordChanged(it)) },
             modifier = Modifier.fillMaxWidth(),
         )
         VSpacer(height = 8.dp)
@@ -129,11 +126,11 @@ private fun AuthScreenContent(
             style = TS.bodySmall,
             modifier = Modifier
                 .align(Alignment.Start)
-                .clickable { onEvent(AuthScreenEvent.OnCreateAccClicked) }
+                .clickable { onEvent(AuthContract.AuthScreenEvent.OnCreateAccClicked) }
         )
         VSpacer(height = 48.dp)
         WhiteButton(
-            onClick = { onEvent(AuthScreenEvent.OnAuthorizeClicked) },
+            onClick = { onEvent(AuthContract.AuthScreenEvent.OnAuthorizeClicked) },
             text = stringResource(resource = Res.string.auth_authorize),
             isLoading = state.isLoading,
             modifier = Modifier.fillMaxWidth(),
@@ -147,7 +144,7 @@ private fun AuthScreenPreview() {
     TaskTrackerTheme {
         AuthScreenContent(
             onEvent = {},
-            state = AuthScreenState(),
+            state = AuthContract.AuthScreenState(),
         )
     }
 }

@@ -3,6 +3,7 @@
 
     <string name="err_unknown_error">Неизвестная ошибка</string>
     <string name="err_unauthorized_error">Ошибка авторизации</string>
+    <string name="err_field_must_not_be_empty">Поле обязательно</string>
 
     <string name="auth_authorization">Авторизация</string>
     <string name="auth_login">Логин</string>

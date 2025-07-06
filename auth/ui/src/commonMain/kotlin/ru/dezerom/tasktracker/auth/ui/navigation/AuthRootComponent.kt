@@ -7,13 +7,12 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
 import kotlinx.serialization.Serializable
 import ru.dezerom.tasktracker.auth.ui.auth.AuthComponent
-import ru.dezerom.tasktracker.auth.ui.auth.DefaultAuthComponent
 
 interface AuthRootComponent {
     val stack: Value<ChildStack<*, Child>>
 
-    sealed interface Child {
-        class Auth(val authComponent: AuthComponent): Child
+    sealed class Child {
+        internal class Auth(val authComponent: AuthComponent): Child()
     }
 }
 
@@ -31,7 +30,17 @@ class DefaultAuthRootComponent(
     )
 
     private fun createChild(config: AuthConfig, componentContext: ComponentContext) = when (config) {
-        AuthConfig.Auth -> AuthRootComponent.Child.Auth(DefaultAuthComponent(componentContext))
+        AuthConfig.Auth -> createAuthComponent(componentContext)
+    }
+
+    private fun createAuthComponent(componentContext: ComponentContext): AuthRootComponent.Child {
+        return AuthRootComponent.Child.Auth(
+            authComponent = AuthComponent(
+                componentContext = componentContext,
+                onAuthorized = {},
+                onCreateAccountClicked = {}
+            )
+        )
     }
 
     @Serializable
