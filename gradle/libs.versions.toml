@@ -81,3 +81,5 @@ build-kmpLibrary = { id = "build.kmp.library", version = "unspecified" }
 build-core-data = { id = "build.core.data", version = "unspecified" }
 build-core-ui = { id = "build.core.ui", version = "unspecified" }
 build-feature-ui = { id = "build.feature.ui", version = "unspecified" }
+build-feature-domain = { id = "build.feature.domain", version = "unspecified" }
+build-feature-data = { id = "build.feature.data", version = "unspecified" }

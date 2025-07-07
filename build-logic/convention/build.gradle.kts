@@ -45,5 +45,13 @@ gradlePlugin {
             id = "build.feature.ui"
             implementationClass = "ru.dezerom.convention.FeatureUiConventionPlugin"
         }
+        register("featureDomain") {
+            id = "build.feature.domain"
+            implementationClass = "ru.dezerom.convention.FeatureDomainConventionPlugin"
+        }
+        register("featureData") {
+            id = "build.feature.data"
+            implementationClass = "ru.dezerom.convention.FeatureDataConventionPlugin"
+        }
     }
 }
