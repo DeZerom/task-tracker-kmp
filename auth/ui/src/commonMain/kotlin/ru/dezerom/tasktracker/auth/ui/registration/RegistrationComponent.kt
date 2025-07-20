@@ -1,6 +1,8 @@
 package ru.dezerom.tasktracker.auth.ui.registration
 
 import com.arkivanov.decompose.ComponentContext
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 import ru.dezerom.tasktracker.auth.domain.AuthInteractor
 import ru.dezerom.tasktracker.auth.ui.registration.RegistrationContract.Event
 import ru.dezerom.tasktracker.auth.ui.registration.RegistrationContract.SideEffect
@@ -59,20 +61,20 @@ internal class RegistrationComponent(
 
         val s = state.value
 
-//        authInteractor.register(s.login, s.password).fold(
-//            onSuccess = {
-//                if (it) {
-//                    launch {
-//                        showSuccess(R.string.success_reg.toStringContainer())
-//                        delay(500)
-//                        _sideEffects.send(RegistrationScreenSideEffect.GoBack)
-//                    }
-//                } else {
-//                    showError(R.string.unknown_error.toStringContainer())
-//                }
-//            },
-//            onFailure = { showError(it) }
-//        )
+        authInteractor.register(s.login, s.password).fold(
+            onSuccess = {
+                if (it) {
+                     coroutineScope {
+//                        showSuccess(Res.string.reg_success_reg.wrapInContainer())
+                        delay(500)
+                        onFinished()
+                    }
+                } else {
+//                    showError(Res.string.err_unknown_error.wrapInContainer())
+                }
+            },
+            onFailure = { /*showError(it)*/ }
+        )
 
         reduceState { copy(isLoading = false) }
     }
