@@ -1,12 +1,16 @@
 package ru.dezerom.tasktracker.auth.data.repository
 
-class AuthRepositoryImpl: AuthRepository {
+import ru.dezerom.tasktracker.auth.data.network.AuthApi
+
+internal class AuthRepositoryImpl(
+    private val authApi: AuthApi
+): AuthRepository {
     override suspend fun authorize(login: String, password: String): Result<Boolean> {
         TODO("Not yet implemented")
     }
 
     override suspend fun register(login: String, password: String): Result<Boolean> {
-        TODO("Not yet implemented")
+        return authApi.register(login, password)
     }
 
     override suspend fun getAuthToken(): String? {
