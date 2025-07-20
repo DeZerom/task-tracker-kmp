@@ -1,6 +1,7 @@
 package ru.dezerom.tasktracker.auth.ui.registration
 
 import com.arkivanov.decompose.ComponentContext
+import ru.dezerom.tasktracker.auth.domain.AuthInteractor
 import ru.dezerom.tasktracker.auth.ui.registration.RegistrationContract.Event
 import ru.dezerom.tasktracker.auth.ui.registration.RegistrationContract.SideEffect
 import ru.dezerom.tasktracker.auth.ui.registration.RegistrationContract.State
@@ -11,7 +12,8 @@ import ru.dezerom.tasktracker.core.ui.decompose.BaseComponent
 
 internal class RegistrationComponent(
     componentContext: ComponentContext,
-    private val onFinished: () -> Unit
+    private val onFinished: () -> Unit,
+    private val authInteractor: AuthInteractor
 ) : BaseComponent<State, Event, SideEffect>(componentContext) {
     override fun initState(): State = State()
 

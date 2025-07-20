@@ -8,6 +8,9 @@ import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.pushNew
 import com.arkivanov.decompose.value.Value
 import kotlinx.serialization.Serializable
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import ru.dezerom.tasktracker.auth.domain.AuthInteractor
 import ru.dezerom.tasktracker.auth.ui.auth.AuthComponent
 import ru.dezerom.tasktracker.auth.ui.registration.RegistrationComponent
 
@@ -22,8 +25,10 @@ interface AuthRootComponent {
 
 class DefaultAuthRootComponent(
     componentContext: ComponentContext
-): AuthRootComponent, ComponentContext by componentContext {
+): AuthRootComponent, ComponentContext by componentContext, KoinComponent {
     private val authNavigation = StackNavigation<AuthConfig>()
+
+    private val authInteractor by inject<AuthInteractor>()
 
     override val stack: Value<ChildStack<*, AuthRootComponent.Child>> = childStack(
         source = authNavigation,
@@ -52,7 +57,8 @@ class DefaultAuthRootComponent(
         return AuthRootComponent.Child.Registration(
             registrationComponent = RegistrationComponent(
                 componentContext = componentContext,
-                onFinished = { authNavigation.pop() }
+                onFinished = { authNavigation.pop() },
+                authInteractor = authInteractor
             )
         )
     }

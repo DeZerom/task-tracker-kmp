@@ -11,6 +11,7 @@ class FeatureDomainConventionPlugin: Plugin<Project> {
         with(target) {
             with(pluginManager) {
                 apply("build.kmp.library")
+                apply("build.koin")
             }
 
             kotlin {

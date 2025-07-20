@@ -25,4 +25,12 @@ kotlin {
             baseName = xcfName
         }
     }
+
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation(projects.auth.domain)
+            }
+        }
+    }
 }

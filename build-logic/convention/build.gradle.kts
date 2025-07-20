@@ -32,6 +32,11 @@ gradlePlugin {
             implementationClass = "ru.dezerom.convention.KmpLibraryConventionPlugin"
         }
 
+        register("koinPlugin") {
+            id = "build.koin"
+            implementationClass = "ru.dezerom.convention.KoinConventionPlugin"
+        }
+
         register("coreData") {
             id = "build.core.data"
             implementationClass = "ru.dezerom.convention.CoreDataConventionPlugin"

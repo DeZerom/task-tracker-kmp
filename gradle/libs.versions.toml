@@ -1,8 +1,8 @@
 [versions]
 agp = "8.10.1"
-android-compileSdk = "35"
+android-compileSdk = "36"
 android-minSdk = "24"
-android-targetSdk = "35"
+android-targetSdk = "36"
 androidx-activity = "1.10.1"
 androidx-appcompat = "1.7.1"
 androidx-constraintlayout = "2.2.1"
@@ -30,6 +30,7 @@ app-versionCode = "2"
 material = "1.12.0"
 decompose = "3.3.0"
 ktor = "3.2.2"
+koin = "4.1.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -55,6 +56,9 @@ arkivanov-decompose = { module = "com.arkivanov.decompose:decompose", version.re
 arkivanov-decomposeComposeExtensions = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "decompose" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 
 # for build logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
@@ -79,6 +83,7 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 
 #build-logic
 build-kmpLibrary = { id = "build.kmp.library", version = "unspecified" }
+build-koin = { id = "build.koin", version = "unspecified" }
 build-core-data = { id = "build.core.data", version = "unspecified" }
 build-core-ui = { id = "build.core.ui", version = "unspecified" }
 build-feature-ui = { id = "build.feature.ui", version = "unspecified" }

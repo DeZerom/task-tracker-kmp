@@ -35,6 +35,7 @@ kotlin {
         commonMain {
             dependencies {
                 addComposeDependencies(compose)
+                api(compose.components.resources)
             }
             resources.srcDirs("src/commonMain/composeResources")
         }

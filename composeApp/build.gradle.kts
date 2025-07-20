@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.build.koin)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
@@ -50,8 +51,12 @@ kotlin {
             implementation(libs.arkivanov.decompose)
             implementation(libs.arkivanov.decomposeComposeExtensions)
 
-            implementation(projects.auth.ui)
             implementation(projects.core.ui)
+            implementation(projects.core.data)
+
+            implementation(projects.auth.ui)
+            implementation(projects.auth.domain)
+            implementation(projects.auth.data)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

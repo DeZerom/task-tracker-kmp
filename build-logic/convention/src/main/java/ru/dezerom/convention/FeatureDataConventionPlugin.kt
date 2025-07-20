@@ -3,8 +3,7 @@ package ru.dezerom.convention
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import ru.dezerom.convention.dependencies.kotlinxSerializationJson
-import ru.dezerom.convention.dependencies.ktorClient
-import ru.dezerom.convention.dependencies.ktorClientCio
+import ru.dezerom.convention.dependencies.ktorClientCore
 import ru.dezerom.convention.dependencies.logging
 import ru.dezerom.convention.utils.kotlin
 import ru.dezerom.convention.utils.libs
@@ -14,6 +13,7 @@ class FeatureDataConventionPlugin: Plugin<Project> {
         with(target) {
             with(pluginManager) {
                 apply("build.kmp.library")
+                apply("build.koin")
                 apply("org.jetbrains.kotlin.plugin.serialization")
             }
 
@@ -27,8 +27,7 @@ class FeatureDataConventionPlugin: Plugin<Project> {
 
                     implementation(libs.kotlinxSerializationJson)
 
-                    implementation(libs.ktorClient)
-                    implementation(libs.ktorClientCio)
+                    implementation(libs.ktorClientCore)
                 }
             }
         }

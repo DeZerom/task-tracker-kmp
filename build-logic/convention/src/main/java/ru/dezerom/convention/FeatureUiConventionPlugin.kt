@@ -19,6 +19,7 @@ class FeatureUiConventionPlugin: Plugin<Project> {
         with(target) {
             with(pluginManager) {
                 apply("build.kmp.library")
+                apply("build.koin")
                 apply("org.jetbrains.compose")
                 apply("org.jetbrains.kotlin.plugin.compose")
                 apply("org.jetbrains.compose.hot-reload")

@@ -6,13 +6,17 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.window.singleWindowApplication
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
+import org.koin.core.context.startKoin
 import ru.dezerom.tasktracker.core.ui.tools.LocalWindowSize
+import ru.dezerom.tasktracker.di.allModules
 import ru.dezerom.tasktracker.navigation.DefaultRootComponent
 import javax.swing.SwingUtilities
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 fun main() {
     val lifecycle = LifecycleRegistry()
+
+    startKoin { modules(allModules) }
 
     val rootComponent = runOnUiThread { 
         DefaultRootComponent(
