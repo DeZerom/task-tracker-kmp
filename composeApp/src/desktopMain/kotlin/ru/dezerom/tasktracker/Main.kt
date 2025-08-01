@@ -16,14 +16,11 @@ import javax.swing.SwingUtilities
 fun main() {
     val lifecycle = LifecycleRegistry()
 
-    startKoin { modules(allModules) }
+    val context = DefaultComponentContext(lifecycle = lifecycle)
+    startKoin { modules(allModules(context)) }
 
     val rootComponent = runOnUiThread { 
-        DefaultRootComponent(
-            DefaultComponentContext(
-                lifecycle = lifecycle
-            )
-        ) 
+        DefaultRootComponent(context)
     }
 
     singleWindowApplication {

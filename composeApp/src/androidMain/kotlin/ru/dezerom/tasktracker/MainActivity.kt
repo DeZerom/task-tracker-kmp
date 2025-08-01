@@ -29,9 +29,10 @@ class MainActivity : ComponentActivity() {
             isAppearanceLightNavigationBars = false
         }
 
-        startKoin { modules(allModules) }
+        val context = defaultComponentContext()
+        startKoin { modules(allModules(context)) }
 
-        val rootComponent = DefaultRootComponent(defaultComponentContext())
+        val rootComponent = DefaultRootComponent(context)
 
         setContent {
             val size = calculateWindowSizeClass(this)

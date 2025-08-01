@@ -9,14 +9,19 @@ import ru.dezerom.tasktracker.auth.ui.registration.RegistrationContract.SideEffe
 import ru.dezerom.tasktracker.auth.ui.registration.RegistrationContract.State
 import ru.dezerom.tasktracker.core.resources.Res
 import ru.dezerom.tasktracker.core.resources.err_field_must_not_be_empty
+import ru.dezerom.tasktracker.core.resources.err_unknown_error
+import ru.dezerom.tasktracker.core.resources.reg_success_reg
 import ru.dezerom.tasktracker.core.tools.stringContainer.wrapInContainer
 import ru.dezerom.tasktracker.core.ui.decompose.BaseComponent
+import ru.dezerom.tasktracker.core.ui.decompose.SnackbarComponent
+import ru.dezerom.tasktracker.core.ui.tools.showError
 
 internal class RegistrationComponent(
     componentContext: ComponentContext,
+    snackbarComponent: SnackbarComponent,
     private val onFinished: () -> Unit,
     private val authInteractor: AuthInteractor
-) : BaseComponent<State, Event, SideEffect>(componentContext) {
+) : BaseComponent<State, Event, SideEffect>(componentContext), SnackbarComponent by snackbarComponent {
     override fun initState(): State = State()
 
     override suspend fun handleEvent(event: Event) {
@@ -65,15 +70,15 @@ internal class RegistrationComponent(
             onSuccess = {
                 if (it) {
                      coroutineScope.launch {
-//                        showSuccess(Res.string.reg_success_reg.wrapInContainer())
+                        showSuccess(Res.string.reg_success_reg.wrapInContainer())
                         delay(500)
                         onFinished()
                     }
                 } else {
-//                    showError(Res.string.err_unknown_error.wrapInContainer())
+                    showError(Res.string.err_unknown_error.wrapInContainer())
                 }
             },
-            onFailure = { /*showError(it)*/ }
+            onFailure = { showError(it) }
         )
 
         reduceState { copy(isLoading = false) }

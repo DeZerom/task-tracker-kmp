@@ -10,3 +10,6 @@ val VersionCatalog.koinTest
 
 val VersionCatalog.koinAndroid
     get() = findLibrary("koin-android").get()
+
+val VersionCatalog.koinCompose
+    get() = findLibrary("koin-compose").get()

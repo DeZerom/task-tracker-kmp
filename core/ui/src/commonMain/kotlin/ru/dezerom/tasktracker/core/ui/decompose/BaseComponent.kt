@@ -1,9 +1,11 @@
 package ru.dezerom.tasktracker.core.ui.decompose
 
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.essenty.lifecycle.doOnDestroy
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -29,6 +31,12 @@ abstract class BaseComponent<State, Event, SideEffect>(
 
     private val _sideEffect = MutableSharedFlow<SideEffect>()
     override val sideEffect = _sideEffect.asSharedFlow()
+
+    protected val currentState get() = _state.value
+
+    init {
+        lifecycle.doOnDestroy { coroutineScope.cancel() }
+    }
 
     abstract fun initState(): State
 

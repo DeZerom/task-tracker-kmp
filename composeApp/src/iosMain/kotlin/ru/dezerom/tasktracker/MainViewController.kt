@@ -15,10 +15,11 @@ import ru.dezerom.tasktracker.navigation.DefaultRootComponent
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Suppress("Unused", "FunctionName")
 fun MainViewController() = ComposeUIViewController {
-    startKoin { modules(allModules) }
+    val context = remember { DefaultComponentContext(ApplicationLifecycle()) }
+    startKoin { modules(allModules(context)) }
 
     val rootComponent = remember {
-        DefaultRootComponent(DefaultComponentContext(ApplicationLifecycle()))
+        DefaultRootComponent(context)
     }
 
     val size = calculateWindowSizeClass()

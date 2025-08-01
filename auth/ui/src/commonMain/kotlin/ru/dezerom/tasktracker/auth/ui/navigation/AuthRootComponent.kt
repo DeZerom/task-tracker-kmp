@@ -13,6 +13,7 @@ import org.koin.core.component.inject
 import ru.dezerom.tasktracker.auth.domain.AuthInteractor
 import ru.dezerom.tasktracker.auth.ui.auth.AuthComponent
 import ru.dezerom.tasktracker.auth.ui.registration.RegistrationComponent
+import ru.dezerom.tasktracker.core.ui.decompose.SnackbarComponent
 
 interface AuthRootComponent {
     val stack: Value<ChildStack<*, Child>>
@@ -29,6 +30,7 @@ class DefaultAuthRootComponent(
     private val authNavigation = StackNavigation<AuthConfig>()
 
     private val authInteractor by inject<AuthInteractor>()
+    private val snackbarComponent by inject<SnackbarComponent>()
 
     override val stack: Value<ChildStack<*, AuthRootComponent.Child>> = childStack(
         source = authNavigation,
@@ -57,6 +59,7 @@ class DefaultAuthRootComponent(
         return AuthRootComponent.Child.Registration(
             registrationComponent = RegistrationComponent(
                 componentContext = componentContext,
+                snackbarComponent = snackbarComponent,
                 onFinished = { authNavigation.pop() },
                 authInteractor = authInteractor
             )

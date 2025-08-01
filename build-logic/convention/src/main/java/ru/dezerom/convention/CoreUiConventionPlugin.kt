@@ -20,6 +20,7 @@ class CoreUiConventionPlugin: Plugin<Project> {
                 apply("build.kmp.library")
                 apply("org.jetbrains.compose")
                 apply("org.jetbrains.kotlin.plugin.compose")
+                apply("build.koin")
             }
 
             kotlin {

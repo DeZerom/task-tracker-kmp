@@ -58,7 +58,7 @@ internal fun RegistrationScreen(
 @Composable
 internal fun RegistrationContent(
     state: RegistrationContract.State,
-    onEvent: (RegistrationContract.Event) -> Unit,
+    onEvent: (RegistrationContract.Event) -> Unit
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
