@@ -65,8 +65,8 @@ class DefaultAuthRootComponent(
 
     @Serializable
     private sealed interface AuthConfig {
-         @Serializable
-         data object Auth : AuthConfig
+        @Serializable
+        data object Auth : AuthConfig
 
         @Serializable
         data object Registration : AuthConfig

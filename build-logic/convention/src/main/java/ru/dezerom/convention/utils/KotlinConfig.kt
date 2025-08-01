@@ -8,6 +8,8 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 @Suppress("UnstableApiUsage")
 internal fun Project.configureKotlinMultiplatform() {
     extensions.configure(KotlinMultiplatformExtension::class.java) {
+        jvmToolchain(11)
+
         androidLibrary {
             compileSdk = 35
             minSdk = 24

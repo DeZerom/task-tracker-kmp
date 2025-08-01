@@ -1,8 +1,8 @@
 package ru.dezerom.tasktracker.auth.ui.registration
 
 import com.arkivanov.decompose.ComponentContext
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import ru.dezerom.tasktracker.auth.domain.AuthInteractor
 import ru.dezerom.tasktracker.auth.ui.registration.RegistrationContract.Event
 import ru.dezerom.tasktracker.auth.ui.registration.RegistrationContract.SideEffect
@@ -64,7 +64,7 @@ internal class RegistrationComponent(
         authInteractor.register(s.login, s.password).fold(
             onSuccess = {
                 if (it) {
-                     coroutineScope {
+                     coroutineScope.launch {
 //                        showSuccess(Res.string.reg_success_reg.wrapInContainer())
                         delay(500)
                         onFinished()
