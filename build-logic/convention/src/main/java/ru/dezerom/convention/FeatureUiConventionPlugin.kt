@@ -39,6 +39,7 @@ class FeatureUiConventionPlugin: Plugin<Project> {
                     implementation(libs.decomposeComposeExtensions)
 
                     addComposeDependencies(compose)
+                    implementation(compose.materialIconsExtended)
                 }
 
                 sourceSets.androidMain.dependencies {
@@ -49,6 +50,7 @@ class FeatureUiConventionPlugin: Plugin<Project> {
                 sourceSets.desktopMain.dependencies {
                     implementation(compose.desktop.currentOs)
                     implementation(libs.kotlinxCoroutinesSwing)
+                    implementation(compose.materialIconsExtended)
                 }
             }
         }

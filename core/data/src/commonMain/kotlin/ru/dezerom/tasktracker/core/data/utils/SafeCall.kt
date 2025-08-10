@@ -14,11 +14,9 @@ import ru.dezerom.tasktracker.core.resources.err_unknown_error
 import ru.dezerom.tasktracker.core.tools.customErrors.NetworkError
 import ru.dezerom.tasktracker.core.tools.stringContainer.wrapInContainer
 
-private val log = logging("safeCall")
-
-suspend fun <T> safeApiCall(
+suspend inline fun <reified T> safeApiCall(
     dispatcher: CoroutineDispatcher = Dispatchers.IO,
-    call: suspend () -> HttpResponse
+    crossinline call: suspend () -> HttpResponse
 ): Result<T> = withContext(dispatcher) {
     try {
         val result = call()
@@ -42,7 +40,7 @@ suspend fun <T> safeApiCall(
             Result.failure(NetworkError(errorMessage))
         }
     } catch (e: Exception) {
-        log.e(err = e, msg = { e.message })
+        logging("safeCall").e(err = e, msg = { e.message })
 
         Result.failure(NetworkError.unknownNetworkError())
     }

@@ -10,7 +10,7 @@ internal class AuthRepositoryImpl(
     }
 
     override suspend fun register(login: String, password: String): Result<Boolean> {
-        return authApi.register(login, password)
+        return authApi.register(login, password).map { it.response }
     }
 
     override suspend fun getAuthToken(): String? {

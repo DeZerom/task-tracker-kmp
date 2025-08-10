@@ -34,6 +34,7 @@ class CoreUiConventionPlugin: Plugin<Project> {
                     implementation(libs.decompose)
 
                     addComposeDependencies(compose)
+                    implementation(compose.materialIconsExtended)
                 }
 
                 sourceSets.androidMain.dependencies {

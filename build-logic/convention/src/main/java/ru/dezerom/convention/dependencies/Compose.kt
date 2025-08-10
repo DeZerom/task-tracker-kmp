@@ -10,7 +10,6 @@ fun KotlinDependencyHandler.addComposeDependencies(compose: ComposePlugin.Depend
     implementation(compose.material3)
     implementation(compose.ui)
     implementation(compose.components.uiToolingPreview)
-    implementation(compose.materialIconsExtended)
 }
 
 val VersionCatalog.composeWindowSize get() =
