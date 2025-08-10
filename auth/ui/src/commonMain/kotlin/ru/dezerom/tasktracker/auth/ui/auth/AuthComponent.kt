@@ -1,19 +1,26 @@
 package ru.dezerom.tasktracker.auth.ui.auth
 
 import com.arkivanov.decompose.ComponentContext
+import ru.dezerom.tasktracker.auth.domain.AuthInteractor
 import ru.dezerom.tasktracker.auth.ui.auth.AuthContract.AuthScreenEvent
 import ru.dezerom.tasktracker.auth.ui.auth.AuthContract.AuthScreenSideEffect
 import ru.dezerom.tasktracker.auth.ui.auth.AuthContract.AuthScreenState
 import ru.dezerom.tasktracker.core.resources.Res
 import ru.dezerom.tasktracker.core.resources.err_field_must_not_be_empty
+import ru.dezerom.tasktracker.core.resources.err_unknown_error
 import ru.dezerom.tasktracker.core.tools.stringContainer.StringContainer
+import ru.dezerom.tasktracker.core.tools.stringContainer.wrapInContainer
 import ru.dezerom.tasktracker.core.ui.decompose.BaseComponent
+import ru.dezerom.tasktracker.core.ui.decompose.SnackbarComponent
+import ru.dezerom.tasktracker.core.ui.tools.showError
 
 internal class AuthComponent(
     componentContext: ComponentContext,
+    snackbarComponent: SnackbarComponent,
     private val onAuthorized: () -> Unit,
-    private val onCreateAccountClicked: () -> Unit
-) : BaseComponent<AuthScreenState, AuthScreenEvent, AuthScreenSideEffect>(componentContext) {
+    private val onCreateAccountClicked: () -> Unit,
+    private val authInteractor: AuthInteractor,
+) : BaseComponent<AuthScreenState, AuthScreenEvent, AuthScreenSideEffect>(componentContext), SnackbarComponent by snackbarComponent {
     override fun initState(): AuthScreenState = AuthScreenState()
 
     override suspend fun handleEvent(event: AuthScreenEvent) {
@@ -58,23 +65,23 @@ internal class AuthComponent(
 
         reduceState { copy(isLoading = true) }
 
-//        val result = authInteractor.authorize(
-//            login = state.value.login,
-//            pass = state.value.password
-//        )
+        val result = authInteractor.authorize(
+            login = state.value.login,
+            pass = state.value.password
+        )
 
-//        result.fold(
-//            onSuccess = {
-//                if (it) {
-//                    _sideEffects.send(AuthScreenSideEffect.GoToTasks)
-//                } else {
-//                    showError(R.string.unknown_error.toStringContainer())
-//                }
-//            },
-//            onFailure = {
-//                showError(it)
-//            }
-//        )
+        result.fold(
+            onSuccess = {
+                if (it) {
+                   showSuccess("Nice auth".wrapInContainer())
+                } else {
+                    showError(Res.string.err_unknown_error.wrapInContainer())
+                }
+            },
+            onFailure = {
+                showError(it)
+            }
+        )
 
         reduceState { copy(isLoading = false) }
     }

@@ -6,7 +6,7 @@ internal class AuthRepositoryImpl(
     private val authApi: AuthApi
 ): AuthRepository {
     override suspend fun authorize(login: String, password: String): Result<Boolean> {
-        TODO("Not yet implemented")
+        return authApi.authorize(login, password).map { true }
     }
 
     override suspend fun register(login: String, password: String): Result<Boolean> {

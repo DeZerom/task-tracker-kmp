@@ -55,4 +55,8 @@ abstract class BaseComponent<State, Event, SideEffect>(
     protected fun reduceState(reducer: State.() -> State) {
         setState(reducer(state.value))
     }
+
+    protected fun setSideEffect(effect: SideEffect) {
+        coroutineScope.launch { _sideEffect.emit(effect) }
+    }
 }

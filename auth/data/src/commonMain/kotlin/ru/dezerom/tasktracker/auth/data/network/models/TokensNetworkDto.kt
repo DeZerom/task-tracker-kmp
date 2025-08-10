@@ -4,9 +4,10 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CredentialsDto(
-    @SerialName("login")
-    val login: String,
-    @SerialName("password")
-    val password: String
+data class TokensNetworkDto(
+    @SerialName("accessToken")
+    val accessToken: String,
+
+    @SerialName("refreshToken")
+    val refreshToken: String
 )

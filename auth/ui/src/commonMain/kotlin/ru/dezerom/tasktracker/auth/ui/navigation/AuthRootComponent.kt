@@ -49,8 +49,10 @@ class DefaultAuthRootComponent(
         return AuthRootComponent.Child.Auth(
             authComponent = AuthComponent(
                 componentContext = componentContext,
+                snackbarComponent = snackbarComponent,
                 onAuthorized = {},
-                onCreateAccountClicked = { authNavigation.pushNew(AuthConfig.Registration) }
+                onCreateAccountClicked = { authNavigation.pushNew(AuthConfig.Registration) },
+                authInteractor = authInteractor
             )
         )
     }
