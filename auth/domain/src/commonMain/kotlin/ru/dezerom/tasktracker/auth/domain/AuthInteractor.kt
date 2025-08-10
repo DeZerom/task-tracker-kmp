@@ -2,11 +2,11 @@ package ru.dezerom.tasktracker.auth.domain
 
 import ru.dezerom.tasktracker.auth.data.repository.AuthRepository
 
-class AuthInteractor constructor(
+class AuthInteractor(
     private val authRepository: AuthRepository
 )  {
     suspend fun isAuthorized(): Boolean =
-        !authRepository.getAuthToken().isNullOrBlank()
+        authRepository.getAuthToken().isNullOrBlank().not()
 
     suspend fun authorize(login: String, pass: String): Result<Boolean> {
         return authRepository.authorize(login, pass)

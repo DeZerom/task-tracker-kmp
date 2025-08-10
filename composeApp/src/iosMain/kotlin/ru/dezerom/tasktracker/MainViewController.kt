@@ -8,6 +8,7 @@ import androidx.compose.ui.window.ComposeUIViewController
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.essenty.lifecycle.ApplicationLifecycle
 import org.koin.core.context.startKoin
+import ru.dezerom.tasktracker.core.data.cache.datastoreCreator.createDatastore
 import ru.dezerom.tasktracker.core.ui.tools.LocalWindowSize
 import ru.dezerom.tasktracker.di.allModules
 import ru.dezerom.tasktracker.navigation.DefaultRootComponent
@@ -16,7 +17,8 @@ import ru.dezerom.tasktracker.navigation.DefaultRootComponent
 @Suppress("Unused", "FunctionName")
 fun MainViewController() = ComposeUIViewController {
     val context = remember { DefaultComponentContext(ApplicationLifecycle()) }
-    startKoin { modules(allModules(context)) }
+    val dataStore = remember { createDatastore() }
+    startKoin { modules(allModules(rootContext = context, dataStore = dataStore)) }
 
     val rootComponent = remember {
         DefaultRootComponent(context)

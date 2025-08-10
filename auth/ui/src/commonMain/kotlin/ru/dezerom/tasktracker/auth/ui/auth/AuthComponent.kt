@@ -1,6 +1,7 @@
 package ru.dezerom.tasktracker.auth.ui.auth
 
 import com.arkivanov.decompose.ComponentContext
+import kotlinx.coroutines.launch
 import ru.dezerom.tasktracker.auth.domain.AuthInteractor
 import ru.dezerom.tasktracker.auth.ui.auth.AuthContract.AuthScreenEvent
 import ru.dezerom.tasktracker.auth.ui.auth.AuthContract.AuthScreenSideEffect
@@ -21,6 +22,10 @@ internal class AuthComponent(
     private val onCreateAccountClicked: () -> Unit,
     private val authInteractor: AuthInteractor,
 ) : BaseComponent<AuthScreenState, AuthScreenEvent, AuthScreenSideEffect>(componentContext), SnackbarComponent by snackbarComponent {
+    init {
+        initialize()
+    }
+
     override fun initState(): AuthScreenState = AuthScreenState()
 
     override suspend fun handleEvent(event: AuthScreenEvent) {
@@ -29,6 +34,18 @@ internal class AuthComponent(
             is AuthScreenEvent.PasswordChanged -> onPasswordChanged(event.newPassword)
             AuthScreenEvent.OnAuthorizeClicked -> onAuthorizeClicked()
             AuthScreenEvent.OnCreateAccClicked -> createAccountClicked()
+        }
+    }
+
+    private fun initialize() {
+        coroutineScope.launch {
+            reduceState { copy(isInitializing = true) }
+
+            if (authInteractor.isAuthorized()) {
+                onAuthorized()
+            } else {
+                reduceState { copy(isInitializing = false) }
+            }
         }
     }
 

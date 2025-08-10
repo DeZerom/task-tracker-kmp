@@ -11,4 +11,4 @@ fun createDatastore(producePath: () -> String): DataStore<Preferences> {
     }
 }
 
-internal val datastoreFileName = "tasktracker.preference_db"
+internal const val datastoreFileName = "tasktracker.preferences_pb"

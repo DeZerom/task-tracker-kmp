@@ -9,5 +9,5 @@ interface AuthRepository {
 
     suspend fun refreshTokens(): Result<Boolean>
 
-    suspend fun unAuthorize(): Result<Boolean>
+    suspend fun unAuthorize()
 }

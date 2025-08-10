@@ -11,6 +11,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.core.view.WindowInsetsControllerCompat
 import com.arkivanov.decompose.defaultComponentContext
 import org.koin.core.context.startKoin
+import ru.dezerom.tasktracker.core.data.cache.datastoreCreator.createDatastore
 import ru.dezerom.tasktracker.core.ui.tools.LocalWindowSize
 import ru.dezerom.tasktracker.di.allModules
 import ru.dezerom.tasktracker.navigation.DefaultRootComponent
@@ -29,10 +30,12 @@ class MainActivity : ComponentActivity() {
             isAppearanceLightNavigationBars = false
         }
 
-        val context = defaultComponentContext()
-        startKoin { modules(allModules(context)) }
+        val componentContext = defaultComponentContext()
+        val dataStore = createDatastore(this)
 
-        val rootComponent = DefaultRootComponent(context)
+        startKoin { modules(allModules(rootContext = componentContext, dataStore = dataStore)) }
+
+        val rootComponent = DefaultRootComponent(componentContext)
 
         setContent {
             val size = calculateWindowSizeClass(this)

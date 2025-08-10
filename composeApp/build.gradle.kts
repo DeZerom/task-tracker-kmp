@@ -51,6 +51,9 @@ kotlin {
             implementation(libs.arkivanov.decompose)
             implementation(libs.arkivanov.decomposeComposeExtensions)
 
+            implementation(libs.androidx.datastore)
+            implementation(libs.androidx.datastorePreferences)
+
             implementation(projects.core.ui)
             implementation(projects.core.data)
 

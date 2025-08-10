@@ -7,6 +7,7 @@ import androidx.compose.ui.window.singleWindowApplication
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import org.koin.core.context.startKoin
+import ru.dezerom.tasktracker.core.data.cache.datastoreCreator.createDatastore
 import ru.dezerom.tasktracker.core.ui.tools.LocalWindowSize
 import ru.dezerom.tasktracker.di.allModules
 import ru.dezerom.tasktracker.navigation.DefaultRootComponent
@@ -17,7 +18,9 @@ fun main() {
     val lifecycle = LifecycleRegistry()
 
     val context = DefaultComponentContext(lifecycle = lifecycle)
-    startKoin { modules(allModules(context)) }
+    val dataStore = createDatastore()
+
+    startKoin { modules(allModules(rootContext = context, dataStore = dataStore)) }
 
     val rootComponent = runOnUiThread { 
         DefaultRootComponent(context)
