@@ -40,6 +40,10 @@ include(":core:tools")
 include(":core:data")
 include(":core:ui")
 
+include(":auth")
 include(":auth:ui")
 include(":auth:domain")
 include(":auth:data")
+
+include(":task-list")
+include(":task-list:ui")

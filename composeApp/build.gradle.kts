@@ -57,6 +57,8 @@ kotlin {
             implementation(projects.auth.ui)
             implementation(projects.auth.domain)
             implementation(projects.auth.data)
+
+            implementation(projects.taskList.ui)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

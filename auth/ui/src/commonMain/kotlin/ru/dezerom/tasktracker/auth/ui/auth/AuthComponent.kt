@@ -73,7 +73,7 @@ internal class AuthComponent(
         result.fold(
             onSuccess = {
                 if (it) {
-                   showSuccess("Nice auth".wrapInContainer())
+                    onAuthorized()
                 } else {
                     showError(Res.string.err_unknown_error.wrapInContainer())
                 }

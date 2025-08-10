@@ -25,7 +25,8 @@ interface AuthRootComponent {
 }
 
 class DefaultAuthRootComponent(
-    componentContext: ComponentContext
+    componentContext: ComponentContext,
+    private val onAuthorized: () -> Unit,
 ): AuthRootComponent, ComponentContext by componentContext, KoinComponent {
     private val authNavigation = StackNavigation<AuthConfig>()
 
@@ -50,7 +51,7 @@ class DefaultAuthRootComponent(
             authComponent = AuthComponent(
                 componentContext = componentContext,
                 snackbarComponent = snackbarComponent,
-                onAuthorized = {},
+                onAuthorized = onAuthorized,
                 onCreateAccountClicked = { authNavigation.pushNew(AuthConfig.Registration) },
                 authInteractor = authInteractor
             )
