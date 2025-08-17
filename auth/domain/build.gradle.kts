@@ -7,7 +7,7 @@ kotlin {
         namespace = "ru.dezerom.tasktracker.auth.domain"
     }
 
-    val xcfName = "coreAuthDomainKit"
+    val xcfName = "authDomainKit"
     iosX64 {
         binaries.framework {
             baseName = xcfName

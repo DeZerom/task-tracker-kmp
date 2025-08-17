@@ -5,6 +5,8 @@
     <string name="err_unauthorized_error">Ошибка авторизации</string>
     <string name="err_field_must_not_be_empty">Поле обязательно</string>
 
+    <string name="kit_loading">Загрузка</string>
+
     <string name="auth_authorization">Авторизация</string>
     <string name="auth_login">Логин</string>
     <string name="auth_password">Пароль</string>
@@ -20,4 +22,12 @@
     <string name="reg_login">Логин</string>
     <string name="reg_password">Пароль</string>
     <string name="reg_has_account">У меня есть аккаунт</string>
+
+    <string name="task_card_created_at">Создано: %s</string>
+    <string name="task_card_deadline_at">Дедлайн: %s</string>
+    <string name="task_card_completed_at">Выполнено: %s</string>
+    <string name="task_card_delete">Удалить задачу</string>
+    <string name="task_card_edit">Редактировать задачу</string>
+    <string name="task_card_collapse">Свернуть</string>
+    <string name="task_card_expand">Развернуть</string>
 </resources>

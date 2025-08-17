@@ -47,3 +47,4 @@ include(":auth:data")
 
 include(":task-list")
 include(":task-list:ui")
+include(":task-list:domain")

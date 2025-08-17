@@ -1,13 +1,13 @@
 plugins {
-    alias(libs.plugins.build.feature.ui)
+    alias(libs.plugins.build.feature.domain)
 }
 
 kotlin {
     androidLibrary {
-        namespace = "ru.dezerom.tasktracker.taskList.ui"
+        namespace = "ru.dezerom.tasktracker.taskList.domain"
     }
 
-    val xcfName = "taskListUi"
+    val xcfName = "taskListDomainKit"
     iosX64 {
         binaries.framework {
             baseName = xcfName
@@ -29,7 +29,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(projects.taskList.domain)
+                implementation(projects.auth.data)
             }
         }
     }
