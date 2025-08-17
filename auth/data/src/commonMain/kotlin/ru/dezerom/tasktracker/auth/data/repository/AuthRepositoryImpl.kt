@@ -6,12 +6,8 @@ import ru.dezerom.tasktracker.auth.data.network.AuthApi
 internal class AuthRepositoryImpl(
     private val authApi: AuthApi,
     private val authCache: AuthCache
-): AuthRepository {
+) : AuthRepository {
     override suspend fun authorize(login: String, password: String): Result<Boolean> {
-        return authApi.authorize(login, password).map { true }
-    }
-
-    override suspend fun register(login: String, password: String): Result<Boolean> {
         val tokens = authApi.authorize(login, password).fold(
             onSuccess = { it },
             onFailure = { return Result.failure(it) }
@@ -20,6 +16,10 @@ internal class AuthRepositoryImpl(
         authCache.saveTokens(accessToken = tokens.accessToken, refreshToken = tokens.refreshToken)
 
         return Result.success(true)
+    }
+
+    override suspend fun register(login: String, password: String): Result<Boolean> {
+        return authApi.register(login, password).map { it.response }
     }
 
     override suspend fun getAuthToken(): String? {
