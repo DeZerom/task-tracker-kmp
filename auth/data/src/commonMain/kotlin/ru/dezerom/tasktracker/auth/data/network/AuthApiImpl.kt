@@ -37,10 +37,22 @@ internal class AuthApiImpl(
         }
     }
 
+    override suspend fun refreshTokens(refreshToken: String): Result<TokensNetworkDto> {
+        return safeApiCall {
+            httpClient.postRequest(
+                url = REFRESH,
+                headers = mapOf(AUTH_HEADER to refreshToken)
+            )
+        }
+    }
+
     companion object {
         private const val AUTH_BASE = "auth"
 
         private const val AUTH = "$AUTH_BASE/auth"
         private const val REGISTRATION = "$AUTH_BASE/register"
+        private const val REFRESH = "$AUTH_BASE/refresh"
+
+        private const val AUTH_HEADER = "Authorization"
     }
 }

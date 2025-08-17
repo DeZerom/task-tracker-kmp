@@ -2,11 +2,13 @@ package ru.dezerom.tasktracker.auth.data.repository
 
 import ru.dezerom.tasktracker.auth.data.cache.AuthCache
 import ru.dezerom.tasktracker.auth.data.network.AuthApi
+import ru.dezerom.tasktracker.core.data.network.tokensManager.TokensManager
+import ru.dezerom.tasktracker.core.tools.customErrors.NetworkError
 
 internal class AuthRepositoryImpl(
     private val authApi: AuthApi,
     private val authCache: AuthCache
-) : AuthRepository {
+) : AuthRepository, TokensManager {
     override suspend fun authorize(login: String, password: String): Result<Boolean> {
         val tokens = authApi.authorize(login, password).fold(
             onSuccess = { it },
@@ -27,7 +29,16 @@ internal class AuthRepositoryImpl(
     }
 
     override suspend fun refreshTokens(): Result<Boolean> {
-        TODO("Not yet implemented")
+        val refresh = authCache.getRefreshToken() ?: return Result.failure(NetworkError.unauthorizedNetworkError())
+
+        val tokens = authApi.refreshTokens(refresh).fold(
+            onSuccess = { it },
+            onFailure = { return Result.failure(it) }
+        )
+
+        authCache.saveTokens(accessToken = tokens.accessToken, refreshToken = tokens.refreshToken)
+
+        return Result.success(true)
     }
 
     override suspend fun unAuthorize() {

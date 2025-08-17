@@ -7,6 +7,7 @@ import io.ktor.client.request.url
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
+import io.ktor.util.appendAll
 
 suspend fun HttpClient.postRequest(
     url: String,
@@ -16,5 +17,16 @@ suspend fun HttpClient.postRequest(
         url(url)
         contentType(ContentType.Application.Json)
         setBody(body)
+    }
+}
+
+suspend fun HttpClient.postRequest(
+    url: String,
+    headers: Map<String, String>
+): HttpResponse {
+    return post {
+        url(url)
+        contentType(ContentType.Application.Json)
+        this@post.headers.appendAll(headers)
     }
 }

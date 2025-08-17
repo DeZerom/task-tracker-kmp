@@ -14,6 +14,10 @@ internal class AuthCache(
         return cache.readString(ACCESS_TOKEN_KEY)
     }
 
+    suspend fun getRefreshToken(): String? {
+        return cache.readString(REFRESH_TOKEN_KEY)
+    }
+
     suspend fun clear() {
         cache.clearAll()
     }

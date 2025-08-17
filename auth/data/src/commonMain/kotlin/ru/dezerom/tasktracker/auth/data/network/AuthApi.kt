@@ -7,4 +7,6 @@ internal interface AuthApi {
     suspend fun register(login: String, password: String): Result<BooleanResponse>
 
     suspend fun authorize(login: String, password: String): Result<TokensNetworkDto>
+
+    suspend fun refreshTokens(refreshToken: String): Result<TokensNetworkDto>
 }
