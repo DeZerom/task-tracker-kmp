@@ -29,6 +29,7 @@ import ru.dezerom.tasktracker.core.resources.auth_authorize
 import ru.dezerom.tasktracker.core.resources.auth_create_account
 import ru.dezerom.tasktracker.core.resources.auth_login
 import ru.dezerom.tasktracker.core.resources.auth_password
+import ru.dezerom.tasktracker.core.ui.customScaffold.AffectScaffold
 import ru.dezerom.tasktracker.core.ui.kit.Colors
 import ru.dezerom.tasktracker.core.ui.kit.TS
 import ru.dezerom.tasktracker.core.ui.kit.buttons.WhiteButton
@@ -84,57 +85,59 @@ private fun AuthScreenContent(
     onEvent: (AuthContract.AuthScreenEvent) -> Unit,
     state: AuthContract.AuthScreenState,
 ) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .verticalScroll(rememberScrollState())
-            .imePadding()
-            .singleElementWidth(LocalWindowSize.current)
-            .padding(all = 16.dp)
-    ) {
-        Image(
-            painter = painterResource(resource = Res.drawable.app_icon),
-            contentDescription = null,
-        )
-        VSpacer(height = 24.dp)
-        Text(
-            stringResource(resource = Res.string.auth_authorization),
-            style = TS.titleLarge
-        )
-        VSpacer(height = 36.dp)
-        TextInput(
-            value = state.login,
-            labelText = stringResource(resource = Res.string.auth_login),
-            isError = state.loginError != null,
-            error = state.loginError?.getString(),
-            onValueChanged = { onEvent(AuthContract.AuthScreenEvent.LoginChanged(it)) },
-            modifier = Modifier.fillMaxWidth(),
-        )
-        VSpacer(height = 16.dp)
-        PasswordInput(
-            value = state.password,
-            labelText = stringResource(resource = Res.string.auth_password),
-            isError = state.passwordError != null,
-            error = state.passwordError?.getString(),
-            onValueChanged = { onEvent(AuthContract.AuthScreenEvent.PasswordChanged(it)) },
-            modifier = Modifier.fillMaxWidth(),
-        )
-        VSpacer(height = 8.dp)
-        Text(
-            text = stringResource(resource = Res.string.auth_create_account),
-            color = Colors.secondaryText,
-            style = TS.bodySmall,
+    AffectScaffold {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .align(Alignment.Start)
-                .clickable { onEvent(AuthContract.AuthScreenEvent.OnCreateAccClicked) }
-        )
-        VSpacer(height = 48.dp)
-        WhiteButton(
-            onClick = { onEvent(AuthContract.AuthScreenEvent.OnAuthorizeClicked) },
-            text = stringResource(resource = Res.string.auth_authorize),
-            isLoading = state.isLoading,
-            modifier = Modifier.fillMaxWidth(),
-        )
+                .verticalScroll(rememberScrollState())
+                .imePadding()
+                .singleElementWidth(LocalWindowSize.current)
+                .padding(all = 16.dp)
+        ) {
+            Image(
+                painter = painterResource(resource = Res.drawable.app_icon),
+                contentDescription = null,
+            )
+            VSpacer(height = 24.dp)
+            Text(
+                stringResource(resource = Res.string.auth_authorization),
+                style = TS.titleLarge
+            )
+            VSpacer(height = 36.dp)
+            TextInput(
+                value = state.login,
+                labelText = stringResource(resource = Res.string.auth_login),
+                isError = state.loginError != null,
+                error = state.loginError?.getString(),
+                onValueChanged = { onEvent(AuthContract.AuthScreenEvent.LoginChanged(it)) },
+                modifier = Modifier.fillMaxWidth(),
+            )
+            VSpacer(height = 16.dp)
+            PasswordInput(
+                value = state.password,
+                labelText = stringResource(resource = Res.string.auth_password),
+                isError = state.passwordError != null,
+                error = state.passwordError?.getString(),
+                onValueChanged = { onEvent(AuthContract.AuthScreenEvent.PasswordChanged(it)) },
+                modifier = Modifier.fillMaxWidth(),
+            )
+            VSpacer(height = 8.dp)
+            Text(
+                text = stringResource(resource = Res.string.auth_create_account),
+                color = Colors.secondaryText,
+                style = TS.bodySmall,
+                modifier = Modifier
+                    .align(Alignment.Start)
+                    .clickable { onEvent(AuthContract.AuthScreenEvent.OnCreateAccClicked) }
+            )
+            VSpacer(height = 48.dp)
+            WhiteButton(
+                onClick = { onEvent(AuthContract.AuthScreenEvent.OnAuthorizeClicked) },
+                text = stringResource(resource = Res.string.auth_authorize),
+                isLoading = state.isLoading,
+                modifier = Modifier.fillMaxWidth(),
+            )
+        }
     }
 }
 
