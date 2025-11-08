@@ -31,7 +31,7 @@ internal class AuthRepositoryImpl(
     override suspend fun refreshTokens(): Result<Boolean> {
         val refresh = authCache.getRefreshToken() ?: return Result.failure(NetworkError.unauthorizedNetworkError())
 
-        val tokens = authApi.refreshTokens("Bearer $refresh").fold(
+        val tokens = authApi.refreshTokens(refresh).fold(
             onSuccess = { it },
             onFailure = { return Result.failure(it) }
         )
