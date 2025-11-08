@@ -1,4 +1,4 @@
-package ru.dezerom.tasktracker.core.ui.kit.text_input
+package ru.dezerom.tasktracker.core.ui.kit.textInput
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

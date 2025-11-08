@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.stack.Children
-import ru.dezerom.tasktracker.taskList.ui.taskList.TasksList
+import ru.dezerom.tasktracker.taskList.ui.taskList.TasksListScreen
 
 @Composable
 fun TaskListRootContent(
@@ -15,7 +15,7 @@ fun TaskListRootContent(
         modifier = Modifier.fillMaxSize()
     ) {
         when (val child = it.instance) {
-            is TaskListRootComponent.Child.TaskList -> TasksList()
+            is TaskListRootComponent.Child.TaskList -> TasksListScreen()
         }
     }
 }

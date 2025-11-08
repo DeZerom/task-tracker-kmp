@@ -51,7 +51,7 @@ import ru.dezerom.tasktracker.core.ui.widgets.VSpacer
 import ru.dezerom.tasktracker.taskList.domain.models.TaskModel
 
 @Composable
-internal fun TaskComponent(
+internal fun TaskCard(
     task: TaskModel,
     isLoading: Boolean,
     onChangeCompleteStatus: (Boolean) -> Unit,
@@ -219,7 +219,7 @@ private fun isLongName(textResult: TextLayoutResult): Boolean {
 @Composable
 private fun TaskComponentPreview() {
     TaskTrackerTheme {
-        TaskComponent(
+        TaskCard(
             task = TaskModel(
                 id = "123",
                 name = "Long long long long task name Long long long long task name Long long long long task name Long long long long task name Long long long long task name Long long long long task name Long long long long task name Long long long long task name",

@@ -6,6 +6,8 @@
     <string name="err_field_must_not_be_empty">Поле обязательно</string>
 
     <string name="kit_loading">Загрузка</string>
+    <string name="kit_err_while_loading">Ошибка при загрузке</string>
+    <string name="kit_try_again">Попробовать снова</string>
 
     <string name="auth_authorization">Авторизация</string>
     <string name="auth_login">Логин</string>
@@ -30,4 +32,8 @@
     <string name="task_card_edit">Редактировать задачу</string>
     <string name="task_card_collapse">Свернуть</string>
     <string name="task_card_expand">Развернуть</string>
+
+    <string name="tasks_list_tasks">Задачи</string>
+    <string name="tasks_list_add_task">Добавить задачу</string>
+    <string name="tasks_list_no_tasks">У вас нет задач</string>
 </resources>
