@@ -7,12 +7,14 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
 import kotlinx.serialization.Serializable
 import org.koin.core.component.KoinComponent
+import ru.dezerom.tasktracker.taskList.ui.taskList.DefaultTasksListComponent
+import ru.dezerom.tasktracker.taskList.ui.taskList.TasksListComponent
 
 interface TaskListRootComponent {
     val stack: Value<ChildStack<*, Child>>
 
     sealed class Child {
-        internal class TaskList(): Child()
+        internal class TaskList(val component: TasksListComponent): Child()
     }
 }
 
@@ -34,7 +36,11 @@ class DefaultTasksListRootComponent(
     }
 
     private fun createTaskList(componentContext: ComponentContext): TaskListRootComponent.Child {
-        return TaskListRootComponent.Child.TaskList()
+        return TaskListRootComponent.Child.TaskList(
+            component = DefaultTasksListComponent(
+                componentContext = componentContext
+            )
+        )
     }
 
     @Serializable

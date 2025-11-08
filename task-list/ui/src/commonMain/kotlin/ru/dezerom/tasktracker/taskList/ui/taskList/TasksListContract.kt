@@ -19,7 +19,7 @@ class TasksListContract {
         ): State()
     }
 
-    internal sealed class Event {
+    sealed class Event {
         data object TryAgainClicked: Event()
         data object Refresh: Event()
         data object EditTaskClosed: Event()
@@ -30,6 +30,8 @@ class TasksListContract {
         class DeleteClicked(val taskId: String): Event()
         class ConfirmDelete(val taskId: String): Event()
     }
+
+    sealed class SideEffect {}
 }
 
 class TaskUiState(

@@ -14,6 +14,8 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
@@ -33,12 +35,12 @@ import ru.dezerom.tasktracker.taskList.ui.taskList.widgets.TaskCard
 
 @Composable
 fun TasksListScreen(
+    component: TasksListComponent
 ) {
+    val state by component.state.collectAsState()
+
     TasksListContent(
-        state = TasksListContract.State.Loaded(
-            tasks = emptyList(),
-            isRefreshing = false,
-        ),
+        state = state,
         onAddClicked = {},
         onTryAgainClicked = {},
         onRefresh = {},

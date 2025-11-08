@@ -15,7 +15,7 @@ fun TaskListRootContent(
         modifier = Modifier.fillMaxSize()
     ) {
         when (val child = it.instance) {
-            is TaskListRootComponent.Child.TaskList -> TasksListScreen()
+            is TaskListRootComponent.Child.TaskList -> TasksListScreen(child.component)
         }
     }
 }
