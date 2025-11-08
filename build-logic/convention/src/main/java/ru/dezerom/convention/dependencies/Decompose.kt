@@ -7,3 +7,6 @@ val VersionCatalog.decompose get() =
 
 val VersionCatalog.decomposeComposeExtensions get() =
     findLibrary("arkivanov-decomposeComposeExtensions").get()
+
+val VersionCatalog.essenty get() =
+    findLibrary("arkivanov-essenty-coroutines").get()

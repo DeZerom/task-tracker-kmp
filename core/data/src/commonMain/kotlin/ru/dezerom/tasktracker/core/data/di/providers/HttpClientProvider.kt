@@ -26,6 +26,7 @@ class HttpClientProvider(
 
             val refreshResult = tokensManager.refreshTokens()
             if (refreshResult.isFailure) {
+                tokensManager.clearTokens()
                 authEventsBus.sendEvent(UnauthorizedEvent)
                 return@intercept result
             }
@@ -43,7 +44,7 @@ class HttpClientProvider(
 
     private suspend fun Sender.sendRequest(request: HttpRequestBuilder): HttpClientCall {
         val token = tokensManager.getAuthToken()
-        if (token != null) request.headers.append(AUTH_HEADER, token)
+        if (token != null) request.headers.append(AUTH_HEADER, "Bearer $token")
 
         return execute(request)
     }

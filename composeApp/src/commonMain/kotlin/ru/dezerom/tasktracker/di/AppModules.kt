@@ -8,6 +8,8 @@ import ru.dezerom.tasktracker.auth.data.di.authDataDiModule
 import ru.dezerom.tasktracker.auth.domain.di.authDomainDiModule
 import ru.dezerom.tasktracker.core.data.di.coreDataDiModule
 import ru.dezerom.tasktracker.core.ui.di.coreUiDiModule
+import ru.dezerom.tasktracker.taskList.data.di.tasksListDiModule
+import ru.dezerom.tasktracker.taskList.domain.di.tasksListDomainModule
 
 fun allModules(
     rootContext: ComponentContext,
@@ -20,6 +22,9 @@ fun allModules(
         coreUiDiModule,
 
         authDataDiModule,
-        authDomainDiModule
+        authDomainDiModule,
+
+        tasksListDiModule,
+        tasksListDomainModule
     )
 }

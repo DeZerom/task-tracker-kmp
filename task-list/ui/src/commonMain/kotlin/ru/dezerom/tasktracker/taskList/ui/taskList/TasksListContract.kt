@@ -19,19 +19,21 @@ class TasksListContract {
         ): State()
     }
 
-    sealed class Event {
-        data object TryAgainClicked: Event()
-        data object Refresh: Event()
-        data object EditTaskClosed: Event()
-        data object CancelDelete: Event()
+    sealed interface Event {
+        data object TryAgainClicked: Event
+        data object Refresh: Event
+        data object EditTaskClosed: Event
+        data object CancelDelete: Event
 
-        class ChangeCompleteStatus(val taskId: String): Event()
-        class EditClicked(val taskId: String): Event()
-        class DeleteClicked(val taskId: String): Event()
-        class ConfirmDelete(val taskId: String): Event()
+        class ChangeCompleteStatus(val taskId: String): Event
+        class EditClicked(val taskId: String): Event
+        class DeleteClicked(val taskId: String): Event
+        class ConfirmDelete(val taskId: String): Event
     }
 
-    sealed class SideEffect {}
+    sealed interface SideEffect {
+        class ShowError(val error: Throwable) : SideEffect
+    }
 }
 
 class TaskUiState(
@@ -43,3 +45,10 @@ data class DeleteTaskAlertState(
     val taskId: String,
     val taskName: String
 )
+
+fun TaskModel.toState(): TaskUiState {
+    return TaskUiState(
+        task = this,
+        isLoading = false
+    )
+}

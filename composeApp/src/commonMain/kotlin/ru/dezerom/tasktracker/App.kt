@@ -1,8 +1,11 @@
 package ru.dezerom.tasktracker
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.koinInject
 import ru.dezerom.tasktracker.core.ui.customScaffold.CustomScaffoldStateHolder
@@ -22,8 +25,10 @@ fun App(rootComponent: RootComponent) {
         CustomScaffold(
             state = customScaffoldState,
             snackbarComponent = snackbarComponent
-        ) {
-            RootContent(rootComponent)
+        ) { paddingValues ->
+            Box(modifier = Modifier.padding(paddingValues)) {
+                RootContent(rootComponent)
+            }
         }
     }
 }

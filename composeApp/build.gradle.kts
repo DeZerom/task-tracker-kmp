@@ -50,10 +50,12 @@ kotlin {
             implementation(libs.compose.windowSize)
             implementation(libs.arkivanov.decompose)
             implementation(libs.arkivanov.decomposeComposeExtensions)
+            implementation(libs.arkivanov.essenty.coroutines)
 
             implementation(libs.androidx.datastore)
             implementation(libs.androidx.datastorePreferences)
 
+            implementation(projects.core.tools)
             implementation(projects.core.ui)
             implementation(projects.core.data)
 
@@ -62,6 +64,8 @@ kotlin {
             implementation(projects.auth.data)
 
             implementation(projects.taskList.ui)
+            implementation(projects.taskList.domain)
+            implementation(projects.taskList.data)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

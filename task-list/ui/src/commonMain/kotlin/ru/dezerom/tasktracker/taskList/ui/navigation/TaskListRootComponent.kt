@@ -7,6 +7,7 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
 import kotlinx.serialization.Serializable
 import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
 import ru.dezerom.tasktracker.taskList.ui.taskList.DefaultTasksListComponent
 import ru.dezerom.tasktracker.taskList.ui.taskList.TasksListComponent
 
@@ -38,7 +39,8 @@ class DefaultTasksListRootComponent(
     private fun createTaskList(componentContext: ComponentContext): TaskListRootComponent.Child {
         return TaskListRootComponent.Child.TaskList(
             component = DefaultTasksListComponent(
-                componentContext = componentContext
+                componentContext = componentContext,
+                snackbarComponent = get()
             )
         )
     }
